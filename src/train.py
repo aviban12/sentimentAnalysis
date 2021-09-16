@@ -40,12 +40,7 @@ def trainModel():
     # plt.show()
     # Word Cloud End
 
-    uniqueLabelsDict = {}
-    uniqueLables = set(list(trainData[1]))
-    count = 0
-    for key, labels in enumerate(uniqueLables):
-        uniqueLabelsDict[labels] = count
-        count += 1
+    uniqueLabelsDict = {'love': 4, 'surprise': 3, 'sadness': 0, 'joy': 5, 'fear': 1, 'anger': 2}
     markedLabels = [uniqueLabelsDict[w] for w in trainData[1]]
     sentimentList = []
     for label in markedLabels:
@@ -74,21 +69,21 @@ def trainModel():
     # accuracy = accuracy_score(y_test, prediction)
     # print(accuracy)
     namedPrediction = []
-    # for i in sentimentList:
-    #     if int(i) == 0:
-    #         namedPrediction.append("Negative")
-    #     else:
-    #         namedPrediction.append("Positive")
-    # #creating Data frame of required
-    # textIds = range(len(trainData))
-    # df = pd.DataFrame({
-    #     'textId': textIds,
-    #     'text': list(fileData[0]),
-    #     'selectedText': finalData,
-    #     'mood': list(fileData[1]),
-    #     'sentiment': namedPrediction
-    # })
-    # df.to_csv('submission/train.csv', index=False)
+    for i in sentimentList:
+        if int(i) == 0:
+            namedPrediction.append("Negative")
+        else:
+            namedPrediction.append("Positive")
+    #creating Data frame of required
+    textIds = range(len(trainData))
+    df = pd.DataFrame({
+        'textId': textIds,
+        'text': list(fileData[0]),
+        'selectedText': finalData,
+        'mood': list(fileData[1]),
+        'sentiment': namedPrediction
+    })
+    df.to_csv('submission/train.csv', index=False)
     return trainedModel, vectorizer
 
 if __name__ == "__main__":

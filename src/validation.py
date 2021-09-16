@@ -27,12 +27,7 @@ def test():
     stopwords = set(stopwords.words('english'))
     wordnet_lemmatizer = WordNetLemmatizer()
 
-    uniqueLabelsDict = {}
-    uniqueLables = set(list(testData[1]))
-    count = 0
-    for key, labels in enumerate(uniqueLables):
-        uniqueLabelsDict[labels] = count
-        count += 1
+    uniqueLabelsDict = {'love': 4, 'surprise': 3, 'sadness': 0, 'joy': 5, 'fear': 1, 'anger': 2}
     markedLabels = [uniqueLabelsDict[w] for w in testData[1]]
     testData[0] = testData[0].map(lambda x: re.sub('[,\.!?]', '', x))
     testData[0] = testData[0].map(lambda x: x.lower())
